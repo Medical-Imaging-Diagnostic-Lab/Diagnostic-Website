@@ -1,0 +1,48 @@
+
+
+.jumbotron
+{
+  text-align:center;
+  background-color:#bdc3c7;
+}
+
+.logo
+{
+  color: #28413a;
+  font-weight: bold;
+}
+
+nav .navbar-brand
+{
+  /* size for brand */
+  font-size: xx-large;
+}
+
+main .form-control
+{
+  /* center form controls */
+  display: inline-block;
+
+  /* override Bootstrap's 100% width for form controls */
+  width: auto;
+}
+
+main
+{
+  /* scroll horizontally as needed */
+  overflow-x: auto;
+
+  /* center contents */
+  text-align: center;
+}
+
+main img
+{
+  /* constrain images on small screens */
+  max-width: 100%;
+}
+
+body
+{
+  padding: 10px 10px
+}

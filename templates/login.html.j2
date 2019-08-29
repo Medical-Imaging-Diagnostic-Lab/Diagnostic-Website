@@ -1,0 +1,29 @@
+{% extends "layout.html.j2" %}
+
+{% block title %}: Log In{% endblock %}
+
+{% block body %}
+  <div class="jumbotron">
+    <h1 class="display-3">Welcome to <span class="logo">MIDS</span>!</h1>
+    <p class="lead">
+      Medical Imaging Diagnostic System
+    </p>
+  </div>
+
+{% endblock %}
+
+{% block main %}
+  <form action="/login" method="post" class="needs-validation" novalidate="">
+    <p class="lead">Login or Register:</p>
+    <div class="form-group">
+      <input autocomplete="off" autofocus class="form-control" name="username" id="username" placeholder="Username" type="text" required>
+      <div class="invalid-feedback">Please enter username to log in!</div>
+    </div>
+    <div class="form-group">
+      <input class="form-control" name="password" id="password" placeholder="Password" type="password" required>
+      <div class="invalid-feedback">Please enter password to continue!</div>
+    </div>
+    <button class="btn btn-sm btn-outline-primary" type="submit" id="submit-button">Log In</button>
+    <input class="btn btn-sm  btn-outline-primary" type="button" value="Register" onclick="window.location.href='/register'"/>
+  </form>
+{% endblock %}
