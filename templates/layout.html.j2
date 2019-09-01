@@ -13,25 +13,102 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+    <!-- <link href="https://fonts.googleapis.com/css?family=Arsenal|Didact+Gothic|Karla|Lekton|News+Cycle|Palanquin+Dark|Pavanam|Pontano+Sans|Questrial|Zilla+Slab&display=swap" rel="stylesheet"> -->
+
+    <link href="https://fonts.googleapis.com/css?family=Arsenal|Didact+Gothic&display=swap" rel="stylesheet">
+
+
   </head>
   <body>
-    {% block body%}
-    {% endblock %}
+    {% if session.username %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand logo" href="/">MIDS</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/">Todo<span class="sr-only">(current)</span></a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-auto mt-2">
+          <div class="btn-group">
+            <div class="btn-group dropleft" role="group">
+              <button type="button" class="btn btn-outline-dark dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="sr-only">Toggle Dropleft</span>
+              </button>
+              <div class="dropdown-menu">
+                <h6 class="dropdown-header">Account options</h6>
+                <a class="dropdown-item" data-toggle="modal" data-target="#changePasswordModal">Change password</a>
+                <a class="dropdown-item" href="/logout">Log out</a>
+              </div>
+            </div>
+            <button type="button" class="btn btn-outline-dark">
+              {{ session.fullname }}
+            </button>
+          </div>
+        </ul>
+      </div>
+    </nav>
+    {% else %}
+      <div class="jumbotron">
+        <h1 class="display-3">Welcome to <span class="logo">MIDS</span>!</h1>
+        <p class="lead">
+          The Medical Imaging Diagnostic System
+        </p>
+      </div>
+    {% endif %}
+
+    {% with messages =  get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-dismissable alert-{{ category }} border text-center" role="alert">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+              {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
 
     <main class="container">
       {% block main%}
       {% endblock %}
     </main>
-  </body>
 
-  <script>
-    $(".submit-button").click(function(event) {
-      var form = $("#needs-validation");
-      if (form[0].checkValidity() === false) {
-        event.preventDefault();
-        event.stopPropagation();
-      }
-      form.addClass('was-validated');
-    });
-  </script>
+    <div id="changePasswordModal" class="modal fade">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Change your password:</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form action="/changePassword" method="post">
+            <div class="modal-body">
+              <div class="form-group">
+                <input class="form-control" name="current"  placeholder="Current password" type="password">
+              </div>
+              <div class="form-group">
+                <input class="form-control" name="new"  placeholder="New password" type="password">
+              </div>
+              <div class="form-group">
+                <input class="form-control" name="confirm"  placeholder="Confirm password" type="password">
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">Save changes</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          <form>
+        </div>
+      </div>
+    </div>
+
+
+  </body>
 </html>

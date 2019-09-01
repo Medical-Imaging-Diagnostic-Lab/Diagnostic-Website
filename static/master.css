@@ -1,3 +1,7 @@
+*
+{
+  font-family: 'Arsenal';
+}
 
 
 .jumbotron
@@ -10,6 +14,7 @@
 {
   color: #28413a;
   font-weight: bold;
+  font-family: 'Didact Gothic';
 }
 
 nav .navbar-brand
